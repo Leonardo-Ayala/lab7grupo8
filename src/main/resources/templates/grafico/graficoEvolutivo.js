@@ -2,10 +2,14 @@
 $(document).ready(function () {
 
     // TODO
+    $("#graficoEvolutivo").click(function () {
 
+             method: "GET";
+            headers: {"https://d3js.org/d3.v4.min.js"};
+    })
 
     // TODO adecuar el url
-    var url = "";
+    var url = "https://api.covid19api.com/countries?name=";
 
 
     // set the dimensions and margins of the graph
@@ -15,7 +19,8 @@ $(document).ready(function () {
 
     // parse the date / time
     //TODO Revisar este Formato
-    var parseTime = d3.timeParse("%d-%m-%Y");
+    //var parseTime = d3.timeParse("%d-%m-%Y");
+    var parseTime = d3.timeParse("%b-%d);
     // var parseTime = d3.timeParse("%d-%b-%y");
 
     // set the ranges
