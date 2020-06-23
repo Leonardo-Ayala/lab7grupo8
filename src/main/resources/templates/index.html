@@ -6,9 +6,43 @@
     <link rel="shortcut icon" href="#" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./index.css">
+    <!--link rel="stylesheet" href="css/index.css"-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="./index.js"></script>
+    <script>
+        $(document).ready(function () {
+            // TODO, consultas a las web services
+            $.ajax({
+                method:"get",
+                url:"https://api.covid19api.com/summary"
+            }).done(function (data) {
+                console.log(data);
+                $("#newConfirmed").text(data.Global.NewConfirmed);
+                $("#newDeaths").text(data.Global.NewDeaths);
+                $("#newRecovered").text(data.Global.NewRecovered);
+                $("#totalConfirmed").text(data.Global.TotalConfirmed);
+                $("#totalDeaths").text(data.Global.TotalDeaths);
+                $("#totalRecovered").text(data.Global.TotalRecovered);
+
+                var listaPaises = data.Countries;
+                var contentHtml = "";
+                $.each(listaPaises, function (i, pais) {
+                    contentHtml += "<tr>";
+                    contentHtml += "<td>" + (i + 1) + "</td>";
+                    contentHtml += "<td>" + pais.Country + "</td>";
+                    contentHtml += "<td>" + pais.TotalConfirmed + "</td>";
+                    contentHtml += "<td>" + pais.TotalDeaths + "</td>";
+                    contentHtml += "<td>" + pais.TotalRecovered + "</td>";
+                    contentHtml += "<td>" + pais.NewConfirmed + "</td>";
+                    contentHtml += "<td>" + pais.NewDeaths + "</td>";
+                    contentHtml += "<td>" + pais.NewRecovered + "</td>";
+                    contentHtml += "</tr>";
+                });
+                $("#body-paises").html(contentHtml);
+            }).fail(function (error) {
+                alert("Ocurrio un error en la app");
+            });
+        });
+    </script>
 </head>
 
 <body>
