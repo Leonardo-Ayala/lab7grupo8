@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>TODO supply a title</title>
@@ -9,32 +9,85 @@
     <link rel="stylesheet" href="./detallePais.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="./detallePais.js"></script>
+    <script>
+        consturlParams=newURLSearchParams(window.location.search);
+        constname=urlParams.get('name');
+        $(document).ready(function () {
+            $("constname")(function () {
+                var paisB = $("constname").val();
+                $.ajax({
+                  method: "POST",
+                    dataType: "json",
+                    url:"https://www.countryflags.io/:country_code/:style/:size.png"
+            }).done(function (data) {
+                console.log(data);
+                $("#capital").text(data.pais.capital);
+                $("#poblacion").text(data.pais.poblacion);
+                $("#subregion").text(data.pais.subregion);
+                $("#fecha").text(data.pais.fecha);
+                $("#TotalConfirmed").text(data.pais.TotalConfirmed);
+                    var listacasos = data.pais;
+                    var contentHtml = "";
+                    $.each(listacasos, function (i,pais) {
+                        contentHtml += "<tr>";
+                        contentHtml += "<td>" + (i + 1) + "</td>";
+                        contentHtml += "<td>" + pais.fecha + "</td>";
+                        contentHtml += "<td>" + pais.TotalConfirmed + "</td>";
+                }).fail(function (err) {
+                    alert("Ocurrio un error en la app");
+                })
+            })
+        }
+    </script>
 </head>
 
 <body>
+
     <!-- <div class="div-body"> -->
     <div class="container mx-auto" style="width: 1200px; margin-top: 20px;">
         <div class=" div-titulo">
-            <h2 class="h2-titulo" id="titulo">Resusmen del país</h2>
+            <h2 class="h2-titulo" id="titulo">Resumen del país</h2>
             <div class="div-bandera" id="bandera-div"></div>
+
         </div>
-        <hr />
-        <a class="btn btn-primary" role="button">Regresar al Resumen</a>
-        <hr />
+        <hr/>
+        <a class="btn btn-primary" role="button">Ver resumen</a>
+        <hr/>
 
         <div>
             <div>
                 <!-- <h4 id="titulo-resumen-global">Características Socieconómicas </h4> -->
                 <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Capital</th>
+                        <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >Capital</td>
+                            <td th:value=${"#capital"}>Capital</td>
+                        </tr>
+                        <tr>
+                            <td >Region</td>
+                            <td th:value=${"#region"}>Region</td>
+                        </tr>
+                        <tr>
+                            <td >Sub Region</td>
+                            <td th:value=${"#subregion"}>Sub Region</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
-        <hr />
+        <hr/>
         <h4>Total de casos desde el día uno</h4>
         <!-- Este <a> es solo un ejemplo -->
         <a id="redirect-grafico" class="btn btn-primary" href="../grafico/graficoEvolutivo.html" role="button">Ver
             Gráfico</a>
-        <hr />
+
+        <hr/>
 
         <table id="casos-pais" class="table">
         </table>
