@@ -35,6 +35,8 @@
                     contentHtml += "<td>" + pais.NewConfirmed + "</td>";
                     contentHtml += "<td>" + pais.NewDeaths + "</td>";
                     contentHtml += "<td>" + pais.NewRecovered + "</td>";
+                    contentHtml += "<td><a class=\"btn btn-primary\" th:href=\"@{'/detallePais/detallePais.html?name='" + pais.Country +"}\">Ver Detalles</a>\n" + "</td>";
+                    //contentHtml += "<td><a class='btn btn-prymary' href='/detallePais/detallePais.html?name=" + pais.Country +"&slug="+pais.Country+"&countryCode="+pais.CountryCode+ "Ver Detalles</a></td>";
                     contentHtml += "</tr>";
                 });
                 $("#body-paises").html(contentHtml);
