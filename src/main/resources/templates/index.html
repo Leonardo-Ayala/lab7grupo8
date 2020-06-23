@@ -16,6 +16,7 @@
                 url:"https://api.covid19api.com/summary"
             }).done(function (data) {
                 console.log(data);
+
                 $("#newConfirmed").text(data.Global.NewConfirmed);
                 $("#newDeaths").text(data.Global.NewDeaths);
                 $("#newRecovered").text(data.Global.NewRecovered);
@@ -29,8 +30,8 @@
                     contentHtml += "<tr>";
                     contentHtml += "<td>" + (i + 1) + "</td>";
                     contentHtml += "<td>" + pais.Country + "</td>";
-                    contentHtml += "<td>" + pais.TotalConfirmed + "</td>";
-                    contentHtml += "<td>" + pais.TotalDeaths + "</td>";
+                    contentHtml += "<td>" + pais.TotalConfirmed +  "</td>";
+                    contentHtml += "<td>" + pais.TotalDeaths +  "</td>";
                     contentHtml += "<td>" + pais.TotalRecovered + "</td>";
                     contentHtml += "<td>" + pais.NewConfirmed + "</td>";
                     contentHtml += "<td>" + pais.NewDeaths + "</td>";
@@ -52,7 +53,7 @@
         <h1 class="mb-3">OMS - COVID-19</h1>
         <hr />
         <div>
-            <h3 id="titulo-resumen-global">Resumen Global - </h3>
+            <h3 id="titulo-resumen-global">Resumen Global -  </h3>
             <table class="table">
                 <thead>
                     <tr>
